@@ -1,41 +1,43 @@
 package org.example;
 
+import org.example.threads.Faction;
+import org.example.threads.Factory;
+
 public class Main {
-    public static void main(String[] args) {
-        System.out.println("=== SKYNET SIMULATION ===");
-        System.out.println("Starting 100-day simulation...\n");
+    public static void main(String[] args) throws InterruptedException {
+        System.out.println("Skynet simulation starting for 100 days...\n");
 
         Factory factory = new Factory();
+        Faction world = new Faction("World", factory);
+        Faction wednesday = new Faction("Wednesday", factory);
 
-        Faction world = new Faction("World", factory.getStorage());
-        Faction wednesday = new Faction("Wednesday", factory.getStorage());
+        factory.start();
+        Thread.sleep(10);
+        world.start();
+        wednesday.start();
 
-        Thread factoryThread = new Thread(factory);
-        Thread worldThread = new Thread(world);
-        Thread wednesdayThread = new Thread(wednesday);
+        factory.join();
 
-        factoryThread.start();
-        worldThread.start();
-        wednesdayThread.start();
-
-        try {
-            factoryThread.join();
-            worldThread.join();
-            wednesdayThread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Thread.sleep(500);
+        world.interrupt();
+        wednesday.interrupt();
+        world.join();
+        wednesday.join();
 
         System.out.println("\n=== FINAL RESULTS ===");
-        System.out.println("World built robots: " + world.getRobotsBuilt());
-        System.out.println("Wednesday built robots: " + wednesday.getRobotsBuilt());
+        world.printStatus();
+        wednesday.printStatus();
 
-        if (world.getRobotsBuilt() > wednesday.getRobotsBuilt()) {
-            System.out.println("WINNER: World!");
-        } else if (wednesday.getRobotsBuilt() > world.getRobotsBuilt()) {
-            System.out.println("WINNER: Wednesday!");
+        System.out.println();
+        int worldRobots = world.calculateCompleteRobots();
+        int wednesdayRobots = wednesday.calculateCompleteRobots();
+
+        if (worldRobots > wednesdayRobots) {
+            System.out.println("Winner: World!");
+        } else if (wednesdayRobots > worldRobots) {
+            System.out.println("Winner: Wednesday!");
         } else {
-            System.out.println("DRAW!");
+            System.out.println("It's a tie!");
         }
     }
 }

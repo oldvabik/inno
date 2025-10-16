@@ -1,4 +1,4 @@
-package collection;
+package org.example;
 
 import org.example.MyLinkedList;
 import org.junit.jupiter.api.Test;
