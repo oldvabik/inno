@@ -28,14 +28,14 @@ public class Faction extends Thread {
         int heads = parts[0].get();
         int torsos = parts[1].get();
         int hands = parts[2].get();
-        int feet = parts[3].get();
+        int foot = parts[3].get();
 
-        return Math.min(Math.min(heads, torsos), Math.min(hands / 2, feet / 2));
+        return Math.min(Math.min(heads, torsos), Math.min(hands / 2, foot / 2));
     }
 
     public void printStatus() {
         int robots = calculateCompleteRobots();
-        System.out.printf("%s: %d robots (Heads: %d, Torsos: %d, Hands: %d, Feet: %d, Total: %d)%n",
+        System.out.printf("%s: %d robots (Heads: %d, Torsos: %d, Hands: %d, Foot: %d, Total: %d)%n",
                 name, robots, parts[0].get(), parts[1].get(), parts[2].get(), parts[3].get(), totalCollected.get());
     }
 

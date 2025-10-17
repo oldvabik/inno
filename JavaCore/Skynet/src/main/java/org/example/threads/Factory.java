@@ -28,15 +28,11 @@ public class Factory extends Thread {
         return partsQueue.size();
     }
 
-    public int getDaysCompleted() {
-        return daysCompleted;
-    }
-
     @Override
     public void run() {
         try {
             for (int day = 1; day <= 100; day++) {
-                produceParts(day);
+                produceParts();
 
                 startNightPhase();
 
@@ -53,7 +49,7 @@ public class Factory extends Thread {
         }
     }
 
-    private void produceParts(int day) throws InterruptedException {
+    private void produceParts() throws InterruptedException {
         int partsCount = random.nextInt(11);
         int[] produced = new int[4];
 
