@@ -1,0 +1,17 @@
+*.idea
+.vscode/
+JavaCore/MyLinkedList/.idea
+JavaCore/MyLinkedList/.mvn
+JavaCore/MyLinkedList/target
+
+JavaCore/SalesAnalysis/.idea
+JavaCore/SalesAnalysis/.mvn
+JavaCore/SalesAnalysis/target
+
+JavaCore/Skynet/.idea
+JavaCore/Skynet/.mvn
+JavaCore/Skynet/target
+
+JavaCore/MiniSpring/.idea
+JavaCore/MiniSpring/.mvn
+JavaCore/MiniSpring/target
